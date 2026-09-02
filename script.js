@@ -573,7 +573,7 @@ function renderProductCard(p) {
     <div class="product-card" data-product="${p.id}" data-selected-color="${defaultColor}">
       ${badgeHtml}
       <div class="product-stock-low">${ICONS.alertTriangle}<span>Nur noch ${p.stockLeft} auf Lager!</span></div>
-      <div class="product-image" style="background:${colorTint(defaultColor)}">${productImageHTML(p)}</div>
+      <div class="product-image" style="background:${colorTint(defaultColor)}">${productImageHTML(p, '', defaultColor)}</div>
       <h3>${p.name}</h3>
       <div class="product-rating">${p.ratingStars} <span>(${p.ratingText})</span></div>
       ${colorSwatchesHTML(p.id, p.colors, defaultColor)}
@@ -605,7 +605,11 @@ function selectProductColor(btn, productId) {
   card.querySelectorAll('.color-swatch').forEach(function (s) { s.classList.remove('active'); });
   btn.classList.add('active');
   const img = card.querySelector('.product-image');
-  if (img) img.style.background = colorTint(cid);
+  if (img) {
+    img.style.background = colorTint(cid);
+    const p = PRODUCTS_BY_ID[productId];
+    if (p) img.innerHTML = productImageHTML(p, '', cid);
+  }
 }
 
 /* "In den Warenkorb" auf der Produktkarte: berücksichtigt die gewählte Farbe */

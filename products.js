@@ -62,7 +62,7 @@ const ICONS = {
    Eigene Fotos hinzufügen: Bilddatei in einen "images/"-Ordner neben
    den HTML-Dateien legen und unten bei "photo" den Pfad eintragen,
    z.B. photo: 'images/kopfhoerer.jpg'. */
-function productImageHTML(p, extraAttrs) {
+function productImageHTML(p, extraAttrs, selectedColorId) {
   extraAttrs = extraAttrs || '';
   const fallbackEmoji = p.emoji || p.image || '📦';
   if (p.photo) {
